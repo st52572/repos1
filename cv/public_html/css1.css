@@ -1,0 +1,36 @@
+
+body{
+    max-width: 600px;
+    margin: auto;
+}
+.photo {
+   
+    width: 200px;
+    height: 220px;
+    float: left;
+    margin-right: 50px;
+    margin-top: 10px;
+}
+
+.cv {
+    height: 220px;
+    overflow: hidden;
+}
+
+.info {
+    float: left;
+}
+
+.kontakt {
+    display: inline-block;
+    max-width: 250px;
+    margin-right: 50px;
+    float: left;
+}
+
+.kontakt2 {
+    display: inline-block;
+    max-width: 250px;
+    margin-left: 50px;
+    float: right;
+}
