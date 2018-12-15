@@ -1,5 +1,9 @@
 <?php
 session_start();
+$page = "index";
+if (isset($_GET["page"])) {
+    $page = $_GET["page"];
+}
 ?>
 <!DOCTYPE html>
 <html lang="cs-CZ">
@@ -9,7 +13,7 @@ session_start();
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="js/script.js"></script>
-        <title>Index</title>
+        <?php echo"<title>$page</title>";?>
     </head>
     <body>
         <div class="grid-container">
@@ -19,10 +23,18 @@ session_start();
                 require_once 'menu.php';
                 ?>
             </div>
-            <div class='item2 main-img'>
-                <img src='img/dum.jpg' alt='dum'>
-            </div>
-
+            <?php
+            if (isset($_GET["page"])) {
+                $file = "./" . $_GET["page"] . ".php";
+                if (file_exists($file)) {
+                    include $file;
+                }
+            } else {
+                echo "<div class='item2 main-img'>
+                        <img src='img/dum.jpg' alt='dum'>
+                    </div>";
+            }
+            ?>
             <?php
             require_once 'footer.php';
             ?>

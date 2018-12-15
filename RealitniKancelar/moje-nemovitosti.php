@@ -1,35 +1,16 @@
 <?php
-session_start();
 if (!isset($_SESSION["logged"])) {
     header("Location: nemovitosti.php");
 }
 $idUZ = $_SESSION["id"];
 ?>
-<!DOCTYPE html>
-<html lang="cs-CZ">
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="js/script.js"></script>
-        <title>Moje nemovitosti</title>
-    </head>
-    <body>
-        <div class="item1">
-            <?php
-            require_once 'info/info.php';
-            require_once 'menu.php';
-            ?>
-
-        </div>
         <div class="item2">
             <div id="seznam">
                 <h2>Moje nemovitosti</h2>
                 <?php
                 $nemovitosti = CNemovitost::selectNemovitosti(NULL, $idUZ);
                 if (sizeof($nemovitosti) > 0) {
-                    //echo "filtr <input type='text' id='filter'>";
+                    
                     $index = 0;
                     foreach ($nemovitosti as $nemovitost) {
                         $fotka = CFotka::selectFotka($nemovitost->getId());
@@ -48,7 +29,7 @@ $idUZ = $_SESSION["id"];
                             echo"<p id='popis$index'>Popis: " . $nemovitost->getPopis() . "</p>";
                         echo"</div>";
                         echo"<div class='link'>";
-                            echo"<a id='link$index' href='moje-nemovitost.php?id=" . $nemovitost->getId() . "' >Upravit</a>";
+                            echo"<a id='link$index' href='?page=moje-nemovitost&id=" . $nemovitost->getId() . "' >Upravit</a>";
                             echo"<button class='delete' value='" . $nemovitost->getId() . "'>Smazat</button>";
                         echo"</div>";
                         echo"</div>";
@@ -60,9 +41,6 @@ $idUZ = $_SESSION["id"];
                 ?>
             </div>
         </div>
-        <?php
-        require_once 'footer.php';
-        ?>
         <script>
             
             $(".delete").click(function () {
@@ -89,6 +67,3 @@ $idUZ = $_SESSION["id"];
                 });
             });
         </script>
-    </body>
-
-</html>

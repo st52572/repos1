@@ -27,5 +27,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["id"] == $_SESSION["id"]) {
         CUzivatel::updateUzivatel($uzivatel);
     }
 }
-header("Location: ../profil.php");
+header("Location: ../index.php?page=profil");
 

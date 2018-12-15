@@ -11,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id_obec = $_POST["obec"];
         $nemovitost = new Nemovitost($id, $text, $popis, $cena, $id_obec, NULL);
         CNemovitost::updateNemovitost($nemovitost);
-        header("Location: ../moje-nemovitost.php?id=$id");
     } else if (isset($_POST["del"])) {
         $id = $_POST["id"];
         CNemovitost::deleteNemovitost($id);
