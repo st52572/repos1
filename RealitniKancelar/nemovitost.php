@@ -63,7 +63,7 @@ session_start();
                     ?>
                     <?php
                 } else {
-                    header("Location: http://localhost/realitnikancelar/nemovitosti.php");
+                    header("Location: nemovitosti.php");
                 }
                 ?>
             </div>

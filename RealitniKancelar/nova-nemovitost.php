@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["logged"])) {
-    header("Location: http://localhost/realitnikancelar/index.php");
+    header("Location: index.php");
 }
 $idUZ = $_SESSION["id"];
 ?>

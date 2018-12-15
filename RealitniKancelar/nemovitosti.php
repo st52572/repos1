@@ -25,7 +25,6 @@ session_start();
                 <?php
                 $nemovitosti = CNemovitost::selectNemovitosti();
 
-                //echo "filtr <input type='text' id='filter'>";
                 $index = 0;
                 
                 if (sizeof($nemovitosti) > 0) {
@@ -66,30 +65,7 @@ session_start();
         <?php
         require_once 'footer.php';
         ?>
-        <script>
-            $("#filter").change(function () {
-                var filtr = $("#filter").val();
-                $.ajax({
-                    url: 'controllers/CFiltrNemovitost.php',
-                    type: 'POST',
-                    data: {
-                        filtr: filtr
-                    },
-                    error: function () {
-                        Messenger().post({
-                            message: 'Error',
-                            type: 'error',
-                            showCloseButton: true
-                        });
-                    },
-                    success: function (data) {
-                        /*var myArr = $.parseJSON(data);
-                         alert(myArr[0]);*/
-                    }
-
-                });
-            });
-        </script>
+        
     </body>
 
 </html>

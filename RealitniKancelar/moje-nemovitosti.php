@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["logged"])) {
-    header("Location: http://localhost/realitnikancelar/nemovitosti.php");
+    header("Location: nemovitosti.php");
 }
 $idUZ = $_SESSION["id"];
 ?>
@@ -64,28 +64,7 @@ $idUZ = $_SESSION["id"];
         require_once 'footer.php';
         ?>
         <script>
-            $("#filter").change(function () {
-                var filtr = $("#filter").val();
-                $.ajax({
-                    url: 'controllers/CFiltrNemovitost.php',
-                    type: 'POST',
-                    data: {
-                        filtr: filtr
-                    },
-                    error: function () {
-                        Messenger().post({
-                            message: 'Error',
-                            type: 'error',
-                            showCloseButton: true
-                        });
-                    },
-                    success: function (data) {
-                        /*var myArr = $.parseJSON(data);
-                         alert(myArr[0]);*/
-                    }
-
-                });
-            });
+            
             $(".delete").click(function () {
                 var id = $(this).val();
                 var del = true;

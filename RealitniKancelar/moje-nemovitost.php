@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["logged"])) {
-    header("Location: http://localhost/realitnikancelar/nemovitosti.php");
+    header("Location: nemovitosti.php");
 }
 $idUZ = $_SESSION["id"];
 ?>
@@ -38,7 +38,7 @@ $idUZ = $_SESSION["id"];
                             $adresa = CAdresa::selectAdresa($nemovitost->getId_obec());
                             $uzivatel = CUzivatel::selectUzivatel($nemovitost->getId_uzivatel());
                             if ($uzivatel->getId() != $_SESSION["id"]) {
-                                header("Location: http://localhost/realitnikancelar/nemovitost.php?id=$id");
+                                header("Location: nemovitost.php?id=$id");
                             }
                             echo"<input id = 'idNemovitost' type = 'hidden' value = $id name ='edit'>
                         <div class='row'>
@@ -72,7 +72,7 @@ $idUZ = $_SESSION["id"];
                         </div>        
                         ";
                         } else {
-                            header("Location: http://localhost/realitnikancelar/nemovitosti.php");
+                            header("Location: nemovitosti.php");
                         }
                         ?>
 
@@ -85,7 +85,7 @@ $idUZ = $_SESSION["id"];
             </div>
         <?php
     } else {
-        header("Location: http://localhost/realitnikancelar/nemovitosti.php");
+        header("Location: nemovitosti.php");
     }
     require_once 'footer.php';
     ?>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["logged"])) {
-    header("Location: http://localhost/realitnikancelar/nemovitosti.php");
+    header("Location: nemovitosti.php");
 }
 ?>
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ if (!isset($_SESSION["logged"])) {
                     $fotky = CFotka::selectFotky($id);
                     $nemovitost = CNemovitost::selectNemovitosti($id, $_SESSION["id"]);
                     if ($nemovitost == NULL) {
-                        //header("Location: http://localhost/realitnikancelar/nemovitost.php?id=$id");
+                        header("Location: nemovitost.php?id=$id");
                     }
                     ?>
                 </div>
@@ -78,7 +78,7 @@ if (!isset($_SESSION["logged"])) {
                 </div>
                 <?php
             } else {
-                header("Location: http://localhost/realitnikancelar/nemovitosti.php");
+                header("Location: nemovitosti.php");
             }
             require_once 'footer.php';
             ?>
