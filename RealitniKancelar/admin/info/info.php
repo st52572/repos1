@@ -8,6 +8,9 @@ require_once BASE_URL . '/../../controllers/CNemovitost.php';
 require_once BASE_URL . '/../../controllers/CUzivatel.php';
 require_once BASE_URL . '/../../controllers/CAdresa.php';
 require_once BASE_URL . '/../../controllers/CFotka.php';
+require_once BASE_URL . '/../controllers/CKraj.php';
+require_once BASE_URL . '/../controllers/COkres.php';
+require_once BASE_URL . '/../controllers/CObec.php';
 
 require_once BASE_URL . '/../../model/Zajemci_Koupe.php';
 require_once BASE_URL . '/../../model/Nemovitost.php';

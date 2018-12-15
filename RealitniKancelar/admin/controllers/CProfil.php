@@ -8,28 +8,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION["opravneni"] == 1) {
 
     $heslo = test_input($_POST["heslo"]);
     $heslo2 = test_input($_POST["heslo2"]);
-    if ($heslo == $heslo2) {
-        $db = DbInfo::getinfo();
-        $select = CUzivatel::selectUzivatele($id);
-        $prihlasovaci_jmeno = test_input($_POST["prihlasovaci_jmeno"]);
-        $jmeno = test_input($_POST["jmeno"]);
-        if (!preg_match("/^[a-zA-Z ]*$/", $jmeno)) {
-            
-        }
-        $prijmeni = test_input($_POST["prijmeni"]);
-        if (!preg_match("/^[a-zA-Z ]*$/", $prijmeni)) {
-            
-        }
-        $email = test_input($_POST["email"]);
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            
-        }
-        $telefon = test_input($_POST["telefon"]);
-        echo $heslo = $_POST["heslo"];
+    $db = DbInfo::getinfo();
+    $select = CUzivatel::selectUzivatel($id);
+    $prihlasovaci_jmeno = test_input($_POST["prihlasovaci_jmeno"]);
+    $jmeno = test_input($_POST["jmeno"]);
+    $prijmeni = test_input($_POST["prijmeni"]);
+    $email = test_input($_POST["email"]);
+    $telefon = test_input($_POST["telefon"]);
+    if ($heslo == $heslo2 && preg_match("/^[a-žA-Ž ]*$/", $jmeno) && preg_match("/^[a-žA-Ž ]*$/", $prijmeni) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+        $heslo = $_POST["heslo"];
 
         $uzivatel = new Uzivatel($id, $prihlasovaci_jmeno, $heslo, 3, $jmeno, $prijmeni, $email, $telefon);
         CUzivatel::updateUzivatel($uzivatel);
     }
 }
-header("Location: http://localhost/realitnikancelar/admin/uzivatele.php");
+header("Location: ../uzivatele.php");
 

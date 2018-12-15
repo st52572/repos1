@@ -4,22 +4,25 @@ class CAdresa {
 
     public static function selectAdresa($clauseObecID) {
         $db = DbInfo::getinfo();
-        $select = "Select * from `obec` where id=$clauseObecID";
-        $obec = null;
-        foreach ($db->query($select) as $row) {
-            $obec = new Obec($row["id"], $row["nazev"], $row["kod"], $row["okres_id"]);
-        }
-        $select2 = "Select * from `okres` where id=".$obec->getId_okres();
-        $okres = null;
-        foreach ($db->query($select2) as $row) {
-            $okres = new Okres($row["id"], $row["nazev"], $row["kod"], $row["kraj_id"]);
-        }
-        $select3 = "Select * from `kraj` where id=".$okres->getId_kraj();
-        $kraj = null;
-        foreach ($db->query($select3) as $row) {
-            $kraj = new Kraj($row["id"], $row["nazev"], $row["kod"]);
-        }
-        $adresa = new Adresa($kraj, $okres, $obec); 
+        $select = $db->prepare("Select * from `obec` where id=?");
+        $select->execute([$clauseObecID]);
+        $row = $select->fetch();
+        $obec = new Obec($row["id"], $row["nazev"], $row["kod"], $row["okres_id"]);
+
+
+        $select2 = $db->prepare("Select * from `okres` where id=?");
+        $select2->execute([$obec->getId_okres()]);
+        $row = $select2->fetch();
+        $okres = new Okres($row["id"], $row["nazev"], $row["kod"], $row["kraj_id"]);
+
+
+
+        $select3 = $db->prepare("Select * from `kraj` where id=?");
+        $select3->execute([$okres->getId_kraj()]);
+        $row = $select3->fetch();
+
+        $kraj = new Kraj($row["id"], $row["nazev"], $row["kod"]);
+        $adresa = new Adresa($kraj, $okres, $obec);
         return $adresa;
     }
 

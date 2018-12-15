@@ -27,14 +27,18 @@ session_start();
 
                 //echo "filtr <input type='text' id='filter'>";
                 $index = 0;
+                
                 if (sizeof($nemovitosti) > 0) {
                     foreach ($nemovitosti as $nemovitost) {
                         $fotka = CFotka::selectFotka($nemovitost->getId());
                         $adresa = CAdresa::selectAdresa($nemovitost->getId_obec());
-
-
+                        $vlastnik = NULL;
+                        if(isset($_SESSION['id']) && $_SESSION["id"] == $nemovitost->getId_uzivatel()){
+                            $vlastnik = "(Vaše nemovitost)";
+                        }
+                        
                         echo"<div class='seznam-piece'>";
-                        echo"<h3 id='text$index'>" . $nemovitost->getText() . "</h3>";
+                        echo"<h3 id='text$index'>" . $nemovitost->getText() . " $vlastnik</h3>";
                         echo"<p id='cena$index'>Cena: " . $nemovitost->getCena() . "</p>";
                         echo"<p id='cena$index'>Adresa: " . $adresa->getKraj()->getNazev() . " - " . $adresa->getOkres()->getNazev() . " - " . $adresa->getObec()->getNazev() . "</p>";
                         echo"<div class='popis'>";

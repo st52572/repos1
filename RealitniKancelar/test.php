@@ -1,5 +1,6 @@
-<form enctype="multipart/form-data" method="post" action="controllers/fromJson.php">
-                    <label>Nemovitost z JSON</label>
-                    <input type='file' name='file' />
-                    <button type="submit">Pøidat</button>
-                </form>
+<?php
+
+if (unlink("img/34/" . end((explode("/", '15443954520.jpg'))))) {
+    echo "TRUE";
+}
+

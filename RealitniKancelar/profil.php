@@ -27,7 +27,7 @@ if (!isset($_SESSION["logged"])) {
         <div class="item2">
             
             <?php
-            $select = CUzivatel::selectUzivatele($id);
+            $uzivatel = CUzivatel::selectUzivatel($id);
             $page = htmlspecialchars('controllers/CProfil.php');
             echo "<div id='zmena-udaju'>
                 <h2>Profil</h2>
@@ -35,7 +35,7 @@ if (!isset($_SESSION["logged"])) {
             <input type='hidden' name='id' value=$id>
                 <div class='uzivatele'>
                 <div class='row-uzivatele'>
-                    <label>Přihlašovací jméno</label><input required type='text' name='prihlasovaci_jmeno' value='" . $select[0]->getPrihlasovaci_jmeno() . "'>
+                    <label>Přihlašovací jméno</label><input required type='text' name='prihlasovaci_jmeno' value='" . $uzivatel->getPrihlasovaci_jmeno() . "'>
                 </div>
                 <div class='row-uzivatele'>
                 <label>Nové heslo</label> <input type='password' name='heslo'>
@@ -45,19 +45,19 @@ if (!isset($_SESSION["logged"])) {
                 </div>
                 <div class='row-uzivatele'>
                     <label>Jméno</label>
-                    <input required type='text' name='jmeno' value='" . $select[0]->getJmeno() . "'>
+                    <input required type='text' name='jmeno' value='" . $uzivatel->getJmeno() . "'>
                 </div>
                 <div class='row-uzivatele'>
                     <label>Příjmení</label>
-                    <input required type='text' name='prijmeni' value='" . $select[0]->getPrijmeni() . "'>
+                    <input required type='text' name='prijmeni' value='" . $uzivatel->getPrijmeni() . "'>
                 </div>
                 <div class='row-uzivatele'>
                     <label>Email</label>
-                    <input required type='text' name='email' value='" . $select[0]->getEmail() . "'>
+                    <input required type='text' name='email' value='" . $uzivatel->getEmail() . "'>
                 </div>
                 <div class='row-uzivatele'>
                     <label>Email</label>
-                    <input required type='text' name='telefon' value='" . $select[0]->getTelefon() . "'>
+                    <input required type='text' name='telefon' value='" . $uzivatel->getTelefon() . "'>
                 </div>
                 <div class='row-uzivatele'>
                     <label>Staré heslo</label>

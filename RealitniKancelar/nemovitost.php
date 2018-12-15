@@ -29,34 +29,34 @@ session_start();
                 <?php
                 if ($_SERVER["REQUEST_METHOD"] == "GET") {
                     $id = $_GET["id"];
-                    $nemovitost = CNemovitost::selectNemovitosti($id);
-                    $adresa = CAdresa::selectAdresa($nemovitost[0]->getId_obec());
-                    $uzivatel = CUzivatel::selectUzivatele($nemovitost[0]->getId_uzivatel());
+                    $nemovitost = CNemovitost::selectNemovitost($id);
+                    $adresa = CAdresa::selectAdresa($nemovitost->getId_obec());
+                    $uzivatel = CUzivatel::selectUzivatel($nemovitost->getId_uzivatel());
                     $fotky = CFotka::selectFotky($id);
                     ?>
-                    <h2><?php echo $nemovitost[0]->getText() ?></h2>
+                    <h2><?php echo $nemovitost->getText() ?></h2>
                     <p>Lokace: <?php
                         echo $adresa->getKraj()->getNazev();
                         echo ", " . $adresa->getOkres()->getNazev();
                         echo ", " . $adresa->getObec()->getNazev();
                         ?></p>
-                    <p>Popis: <?php echo $nemovitost[0]->getPopis() ?></p>
-                    <p>CENA: <?php echo $nemovitost[0]->getCena() ?> Kč</p>
+                    <p>Popis: <?php echo $nemovitost->getPopis() ?></p>
+                    <p>CENA: <?php echo $nemovitost->getCena() ?> Kč</p>
                     <p>Kontakt: <?php
-                        echo $uzivatel[0]->getJmeno();
-                        echo ', ' . $uzivatel[0]->getPrijmeni();
-                        echo ', ' . $uzivatel[0]->getEmail();
-                        echo ', ' . $uzivatel[0]->getTelefon();
+                        echo $uzivatel->getJmeno();
+                        echo ', ' . $uzivatel->getPrijmeni();
+                        echo ', ' . $uzivatel->getEmail();
+                        echo ', ' . $uzivatel->getTelefon();
                         ?></p>
                     <?php
                     if (!isset($_SESSION["id"])) {
                         echo "<p class='dalsi-info'>Pro vytvoření nabídky se přihlaš!</p>";
                     } else {
                         $idZajemce = $_SESSION['id'];
-                        if (isset($_SESSION["logged"]) && $uzivatel[0]->getId() != $_SESSION["id"]) {
+                        if (isset($_SESSION["logged"]) && $uzivatel->getId() != $_SESSION["id"]) {
                             echo "<input class='dalsi-info' type='hidden' value='$idZajemce' id='zajemce'>";
-                            echo "<button class='dalsi-info' value='" . $nemovitost[0]->getId() . "' id='nabidka'>Udělat nabídku</button>";
-                        } else if ($uzivatel[0]->getId() == $_SESSION["id"]) {
+                            echo "<button class='dalsi-info' value='" . $nemovitost->getId() . "' id='nabidka'>Udělat nabídku</button>";
+                        } else if ($uzivatel->getId() == $_SESSION["id"]) {
                             echo "<p class='dalsi-info'>Vaše nemovitost</p>";
                         }
                     }

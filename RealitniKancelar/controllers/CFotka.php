@@ -4,35 +4,37 @@ class CFotka {
 
     public static function selectFotka($idNemovitost) {
         $db = DbInfo::getinfo();
-        $select = "Select * from `fotky` where id_nemovitost=$idNemovitost LIMIT 1";
-        $fotka = null;
-        foreach ($db->query($select) as $row) {
-            $fotka = new Fotka($row["id"], $row["nazev"],$row["text"], $row["id_nemovitost"]);
-        }
+        $select = $db->prepare("Select * from `fotky` where id_nemovitost=? LIMIT 1");
+        $select->execute([$idNemovitost]);
+        $row = $select->fetch();
+
+        $fotka = new Fotka($row["id"], $row["nazev"], $row["text"], $row["id_nemovitost"]);
         return $fotka;
     }
-    
+
     public static function selectFotky($idNemovitost) {
         $db = DbInfo::getinfo();
-        $select = "Select * from `fotky` where id_nemovitost=$idNemovitost";
+        $select = $db->prepare("Select * from `fotky` where id_nemovitost=?");
+        $select->execute([$idNemovitost]);
         $fotky = null;
         $index = 0;
-        foreach ($db->query($select) as $row) {
-            $fotky[$index++] = new Fotka($row["id"], $row["nazev"],$row["text"], $row["id_nemovitost"]);
+        $rows = $select->fetchAll();
+        foreach ($rows as $row) {
+            $fotky[$index++] = new Fotka($row["id"], $row["nazev"], $row["text"], $row["id_nemovitost"]);
         }
         return $fotky;
     }
-    
-    public static function updateFotka($id,$text) {
+
+    public static function updateFotka($id, $text) {
         $db = DbInfo::getinfo();
-        $update = $db->prepare("UPDATE `fotky` SET `text`='$text' WHERE `id`=$id");
-        $updated = $update->execute();
+        $update = $db->prepare("UPDATE `fotky` SET `text`=? WHERE `id`=?");
+        $updated = $update->execute(array($text, $id));
         return $updated;
     }
-    
+
     public static function insertFotky($idNemovitost) {
         $db = DbInfo::getinfo();
-        
+
         $count = count($_FILES['fileToUpload']['name']);
         $target_dir = "../img/";
         $file = $idNemovitost;
@@ -53,11 +55,17 @@ class CFotka {
         }
         return $inserted;
     }
+
     public static function deleteFotka($id) {
         $db = DbInfo::getinfo();
-        $delete = $db->prepare("Delete from `fotky` WHERE `id`=$id");
-        $updated = $delete->execute();
-        return $updated;
+        $select = $db->prepare("Select * from `fotky` where id=?");
+        $select->execute([$id]);
+        $row = $select->fetch();
+        if (unlink("../img/".$row["id_nemovitost"]."/" . end((explode("/", $row["nazev"]))))) {
+            $delete = $db->prepare("Delete from `fotky` WHERE `id`=?");
+            $deleted = $delete->execute([$id]);
+       }
+        return $deleted;
     }
 
 }

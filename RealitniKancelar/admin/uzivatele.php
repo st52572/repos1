@@ -24,7 +24,7 @@ if (!isset($_SESSION["logged"]) && $_SESSION["opravneni"] != 1) {
             </div>
             <div class="item2">
                 <?php
-                $select = CUzivatel::selectUzivatele(NULL,"where opravneni > 1");
+                $select = CUzivatel::selectUzivatele("where opravneni > ?",[1]);
                 $page = htmlspecialchars('controllers/CProfil.php');
                 foreach ($select as $uzivatel) {
                     echo "<div id='zmena-udaju'>

@@ -6,16 +6,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $prihlasovaci_jmeno = $_POST["prihlasovaci_jmeno"];
     $heslo = $_POST["heslo"];
     $db = DbInfo::getinfo();
-    $select = "Select * from `uzivatele` where prihlasovaci_jmeno='$prihlasovaci_jmeno'";
-    foreach ($db->query($select) as $row) {
-
-        if (password_verify($heslo, $row["heslo"])) {
-            $_SESSION["id"] = $row["id"];
-            $_SESSION["logged"] = TRUE;
-            $_SESSION["opravneni"] = $row["opravneni"];
-            
-        }
-
+    $uzivatel = CUzivatel::selectUzivatel(NULL, $prihlasovaci_jmeno);
+    if (password_verify($heslo, $uzivatel->getHeslo())) {
+        $_SESSION["id"] = $uzivatel->getId();
+        $_SESSION["logged"] = TRUE;
+        $_SESSION["opravneni"] = $uzivatel->getOpravneni();
     }
-    header("Location: http://localhost/realitnikancelar/index.php");
+    
+    header("Location: ../index.php");
 }

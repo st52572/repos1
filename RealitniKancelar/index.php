@@ -19,9 +19,10 @@ session_start();
                 require_once 'menu.php';
                 ?>
             </div>
-            <div class="item2 main-img">
-                <img src="img/dum.jpg" alt="dum">
+            <div class='item2 main-img'>
+                <img src='img/dum.jpg' alt='dum'>
             </div>
+
             <?php
             require_once 'footer.php';
             ?>

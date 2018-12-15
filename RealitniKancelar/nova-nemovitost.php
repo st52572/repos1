@@ -115,7 +115,7 @@ $idUZ = $_SESSION["id"];
                             showCloseButton: true
                         });
                     },
-                    success: function (data) {
+                    success: function () {
                         location.reload();
                     }
                 });

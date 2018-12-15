@@ -1,5 +1,5 @@
 <?php
-
+echo "<a href='index.php'>Hlavní stránka</a>";
 echo "<a href='nemovitosti.php'>Nemovitosti</a>";
 if (isset($_SESSION["logged"])) {    
     echo "<a href='moje-nemovitosti.php'>Moje nemovitosti</a>";

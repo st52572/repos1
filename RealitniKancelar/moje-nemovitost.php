@@ -33,22 +33,22 @@ $idUZ = $_SESSION["id"];
                     <form action="<?php echo $page;?>" id="form" method="POST">
 
                         <?php
-                        $nemovitost = CNemovitost::selectNemovitosti($id);
+                        $nemovitost = CNemovitost::selectNemovitost($id);
                         if (sizeof($nemovitost) > 0) {
-                            $adresa = CAdresa::selectAdresa($nemovitost[0]->getId_obec());
-                            $uzivatel = CUzivatel::selectUzivatele($nemovitost[0]->getId_uzivatel());
-                            if ($uzivatel[0]->getId() != $_SESSION["id"]) {
+                            $adresa = CAdresa::selectAdresa($nemovitost->getId_obec());
+                            $uzivatel = CUzivatel::selectUzivatel($nemovitost->getId_uzivatel());
+                            if ($uzivatel->getId() != $_SESSION["id"]) {
                                 header("Location: http://localhost/realitnikancelar/nemovitost.php?id=$id");
                             }
                             echo"<input id = 'idNemovitost' type = 'hidden' value = $id name ='edit'>
                         <div class='row'>
-                            <label>Text</label><input name = 'text' type ='text' value = '" . $nemovitost[0]->getText() . "'>
+                            <label>Text</label><input name = 'text' type ='text' value = '" . $nemovitost->getText() . "'>
                         </div>
                         <div class='row'>
-                            <label>Popis</label><textarea name = 'popis' >" . $nemovitost[0]->getPopis() . "</textarea>
+                            <label>Popis</label><textarea name = 'popis' >" . $nemovitost->getPopis() . "</textarea>
                         </div>
                         <div class='row'>
-                            <label>Cena</label><input name='cena' type='text' value='" . $nemovitost[0]->getCena() . "'>
+                            <label>Cena</label><input name='cena' type='text' value='" . $nemovitost->getCena() . "'>
                         </div>
                         <input type='hidden' id='idKraj' value='" . $adresa->getKraj()->getId() . "'>
                         <input type='hidden' id='idOkres' value='" . $adresa->getOkres()->getId() . "'>
