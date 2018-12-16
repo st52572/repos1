@@ -21,10 +21,10 @@ $idUZ = $_SESSION["id"];
                             echo"<p id='cena$index'>Cena: " . $nemovitost->getCena() . "</p>";
                             echo"<p id='cena$index'>Adresa: " . $adresa->getKraj()->getNazev() . " - ".$adresa->getOkres()->getNazev()." - ".$adresa->getObec()->getNazev()."</p>";
                         echo"<div class='popis'>";
-                            if ($fotka != NULL) {
+                            if ($fotka->getId() != NULL) {
                                 echo"<img id='fotka$index' src=" . $fotka->getNazev() . " alt='fotka'>";
                             } else {
-                                echo"<p>Není k dispozici</p>";
+                                 echo"<img id='fotka$index' src='img/noimage.jpg' alt='fotka'>";
                             }
                             echo"<p id='popis$index'>Popis: " . $nemovitost->getPopis() . "</p>";
                         echo"</div>";
